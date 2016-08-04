@@ -1,3 +1,4 @@
+var sanitizeHtml = require('sanitize-html');
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
@@ -26,7 +27,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('message', function (msg) {
-        socket.broadcast.emit('message', {content: msg['message']});
+        socket.broadcast.emit('message', {content: sanitizeHtml(msg['message'])});
     });
 
 });
