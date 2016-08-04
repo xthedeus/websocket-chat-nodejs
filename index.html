@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Socket Chat</title>
+	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<h1>WebSocket Chat NodeJS <small>active users: <span id="active-users-count">0</span></small></h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Enter message" id="message-input">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button" id="message-button">Send!</button>
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="list-group" id="message-container" style="margin-top:16px"></ul>
+		</div>
+	</div>
+
+</div>
+
+
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var socket = io("http://localhost:8001");
+	  	socket.on('connect', function () {
+	    	socket.on('connection_status', function (message) {
+	      		$('#active-users-count').html(message.count);
+	    	});
+
+	    	socket.on('message', function(message) {
+	    		$('#message-container').prepend('<li class="list-group-item" style="text-align:right;">' + message.content + '</li>');
+	    	});
+	  	});
+
+	  	$("#message-button").click(function() {
+            sendMessage();
+        });
+
+        $('#message-input').keypress(function(event){
+		    var keycode = (event.keyCode ? event.keyCode : event.which);
+		    if(keycode == '13'){
+		        sendMessage();
+		    }
+		});
+
+		function sendMessage() {
+			var message = $('#message-input').val().trim();
+            if(message.length > 0) {
+            	socket.emit('message', {'message': message});
+            	$('#message-container').prepend('<li class="list-group-item active" style="text-align:left;">' + message + '</li>');
+            	$('#message-input').val('');
+            	$('#message-input').focus();
+            }
+		}
+
+    });
+</script>
+</body>
+</html>

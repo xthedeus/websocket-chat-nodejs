@@ -1,0 +1,17 @@
+{
+  "name": "websocket-chat-nodejs",
+  "version": "1.0.0",
+  "description": "a socketbased webchat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xthedeus",
+  "license": "MIT",
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0",
+    "nodejs-websocket": "^1.6.0",
+    "socket.io": "^1.4.8"
+  }
+}
