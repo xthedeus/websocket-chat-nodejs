@@ -1,6 +1,8 @@
 
 # Created by https://www.gitignore.io/api/node,bower,osx,macos,windows,grunt
 
+config.json
+
 ### Node ###
 # Logs
 logs
