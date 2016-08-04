@@ -42,7 +42,7 @@
 
     	var port = window.location.port;
 
-        var socket = io("http://localhost:" + port);
+        var socket = io(window.location.protocol + "//" + window.location.host);
 	  	socket.on('connect', function () {
 	    	socket.on('connection_status', function (message) {
 	      		$('#active-users-count').html(message.count);
