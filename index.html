@@ -40,7 +40,9 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-        var socket = io("http://localhost:8001");
+    	var port = 8001;
+
+        var socket = io("http://localhost:" + port);
 	  	socket.on('connect', function () {
 	    	socket.on('connection_status', function (message) {
 	      		$('#active-users-count').html(message.count);
