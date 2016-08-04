@@ -1,15 +1,17 @@
 {
   "name": "websocket-chat-nodejs",
   "version": "1.0.0",
-  "description": "a socketbased webchat",
+  "description": "A simple socket-based chat app",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xthedeus/websocket-chat-nodejs.git"
   },
   "author": "xthedeus",
   "license": "MIT",
   "devDependencies": {
     "bootstrap": "^3.3.7",
+    "bootstrap-material-design": "^0.5.10",
     "express": "^4.14.0",
     "jquery": "^3.1.0",
     "nodejs-websocket": "^1.6.0",

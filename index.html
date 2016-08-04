@@ -2,13 +2,19 @@
 <html>
 <head>
 	<title>Socket Chat</title>
-	<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css">
 </head>
 <body>
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-sm-12">
 			<div class="page-header">
 				<h1>WebSocket Chat NodeJS <small>active users: <span id="active-users-count">0</span></small></h1>
 			</div>
@@ -16,19 +22,24 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-12">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Enter message" id="message-input">
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button" id="message-button">Send!</button>
-				</span>
+		<div class="col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="form-group input-group">
+				       	<input type="email" class="form-control" id="message-input" placeholder="Enter message">
+				        <span class="input-group-btn">
+							<button class="btn btn-info" type="button" id="message-button">Send!</button>
+						</span>
+				    </div>
+				</div>
 			</div>
+			
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-12">
-			<ul class="list-group" id="message-container" style="margin-top:16px"></ul>
+		<div class="col-sm-12">
+			<div id="message-container"></div>
 		</div>
 	</div>
 
@@ -36,6 +47,7 @@
 
 
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/bootstrap-material-design/dist/js/material.min.js"></script>
 <script src="node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -50,10 +62,12 @@
 
 	    	socket.on('message', function(message) {
 	    		if(message.content.length > 0) {
-	    			$('#message-container').prepend('<li class="list-group-item" style="text-align:right;">' + message.content + '</li>');
+	    			$('#message-container').prepend('<div class="well" style="text-align:right;">' + message.content + '</div>');
 	    		}
 	    	});
 	  	});
+
+	  	$('#message-input').focus();
 
 	  	$("#message-button").click(function() {
             sendMessage();
@@ -70,7 +84,7 @@
 			var message = $('#message-input').val().trim();
             if(message.length > 0) {
             	socket.emit('message', {'message': message});
-            	$('#message-container').prepend('<li class="list-group-item active" style="text-align:left;">' + message + '</li>');
+            	$('#message-container').prepend('<div class="well" style="text-align:left;">' + message + '</div>');
             	$('#message-input').val('');
             	$('#message-input').focus();
             }
