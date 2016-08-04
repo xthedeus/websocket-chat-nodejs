@@ -1,18 +1,8 @@
 var io = require('socket.io')();
-var fs = require('fs');
 
 var count = 0;
 
-var configurationFile, config;
-
-configurationFile = 'config.json';
-
-try {
-    config = JSON.parse(fs.readFileSync(configurationFile));
-} catch (ex) {
-    console.log("Something bad happended: " + ex);
-    return;
-}
+var port = process.argv[process.argv.length-1];
 
 io.on('connection', function(socket){
     console.log("new user_connected");
@@ -32,4 +22,4 @@ io.on('connection', function(socket){
 
 });
 
-io.listen(config.port);
+io.listen(port);
