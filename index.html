@@ -49,7 +49,9 @@
 	    	});
 
 	    	socket.on('message', function(message) {
-	    		$('#message-container').prepend('<li class="list-group-item" style="text-align:right;">' + message.content + '</li>');
+	    		if(message.content.length > 0) {
+	    			$('#message-container').prepend('<li class="list-group-item" style="text-align:right;">' + message.content + '</li>');
+	    		}
 	    	});
 	  	});
 
