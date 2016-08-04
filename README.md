@@ -1,6 +1,9 @@
 # websocket-chat-nodejs
 A simple socket-based chat app
 
+####Prerequisites:
+- NodeJS
+
 ###How to run it
 1. Clone the repo: `git clone https://github.com/xthedeus/websocket-chat-nodejs.git`
 2. Cd into the repo: `cd websocket-chat-nodejs`
